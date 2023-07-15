@@ -2,9 +2,9 @@ import './style.css';
 
 const WebChat = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <h1>Web</h1>
+        </>
     );
 }
 
