@@ -3,16 +3,21 @@ import { useContext ,useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import UserContext from '../../context/UserContext';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [user , setUser ] = useState("")
+    const [user , setUser ] = useState("UserName")
     const { setUsername } = useContext(UserContext)
+    const navigate = useNavigate();
 
     function handleChange({target: {value}}){
         setUser(value)
         setUsername(value)
     } 
 
+    function handleClick(){
+        return navigate("/chat");
+    }
     return (
         <div className='container-login'>
             <div>
@@ -20,7 +25,7 @@ const Login = () => {
                 <Form>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Control maxLength={20} onChange={handleChange} type="text" placeholder="PatoDeBarba" />
-                        <a href='/chat'><Button variant="dark">Entrar</Button></a>
+                       <Button onClick={handleClick} variant="dark">Entrar</Button>
                     </Form.Group>
                 </Form>
             </div>
