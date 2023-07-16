@@ -6,19 +6,19 @@
     align-items: center;
 }
 
-.container-login form button {
+.container-login div button {
    width: 50%;
    width: 100%;
    margin-top: 20px;
 }
 
 
-.container-login form button a {
+.container-login div button a {
     text-decoration: none;
     color: white;
  }
 
-.container-login form h3 {
+.container-login div h3 {
     text-align: center;
 }
 
