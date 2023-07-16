@@ -1,14 +1,19 @@
 import './style.css';
-import { useContext ,useState} from 'react';
+import { useContext ,useState, useEffect} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import UserContext from '../../context/UserContext';
 import { useNavigate } from "react-router-dom";
+import socketUtils from '../../socket/socketUtils';
 
 const Login = () => {
     const [user , setUser ] = useState("UserName")
     const { setUsername } = useContext(UserContext)
     const navigate = useNavigate();
+
+    useEffect(()=> {
+        socketUtils.connectedIO();
+    },[])
 
     function handleChange({target: {value}}){
         setUser(value)
