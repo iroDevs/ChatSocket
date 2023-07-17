@@ -2,13 +2,22 @@ import './style.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import UserContext from '../../context/UserContext';
+import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from 'react';
 
 const WebChat = () => {
     const [ message, setMessage ] = useState("")
     const [ messageList , setMessageList ] = useState([])
-
     const { username, userId ,socket } = useContext(UserContext)
+    const navigate = useNavigate();
+
+
+
+    useEffect(()=> {
+        if (!socket) {
+            navigate("/")
+        }
+    },[])
 
     useEffect(()=> {
         socket.on('receive_message', data => {
@@ -21,11 +30,13 @@ const WebChat = () => {
 
     function handleClick(){
         socket.emit('message', message)
+        setMessage("")
     }
 
     function handleChange({target: {value}}){
         setMessage(value)
     }
+
     return (
         <div className="container-chat">
             <h4>Chat</h4>
@@ -47,8 +58,8 @@ const WebChat = () => {
 
                 </ul>    
             </div>  
-            <Form>
-                <Form.Control onChange={handleChange} maxLength={200}  type="text" placeholder="Message.." />
+            <Form onSubmit={e => e.preventDefault()}>
+                <Form.Control value={message} onChange={handleChange} maxLength={200}  type="text" placeholder="Message.." />
                 <Button onClick={handleClick} variant="dark">Enviar</Button>
             </Form>
         </div>
