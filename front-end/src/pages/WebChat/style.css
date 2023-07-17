@@ -19,14 +19,17 @@
     margin-top: 20px;
  }
 
-.chat {
+ .chat {
     width: 90%;
     height: 70vh;
-    border:1px solid #ffff;
+    min-height: 0; 
+    border: 1px solid #ffff;
     display: flex;
     flex-direction: column;
+    overflow-y: auto; 
+  }
 
-}
+  
 
 .chat ul {
    list-style: none;
@@ -38,13 +41,16 @@
 .chat ul li span {
     margin-left: 2px;
     font-size: 1.1em;
-    color: red
+    color: red;
+    
 }
 
 .chat ul li {
     font-size: 1.2em;
     color: rgb(255, 255, 255);
     font-weight: 500;
+    margin: 6px 10px ;
+    
 }
 
 .myMessage {
@@ -52,6 +58,9 @@
     width: fit-content;
     padding: 10px 20px;
     border-radius: 3%;
+    border-radius: 30% ;
+    border-bottom-left-radius: 0;
+    padding: 20px;
    
 }
 
@@ -64,4 +73,7 @@
     padding: 10px 20px;
     border-radius: 3%;
     width: fit-content;
+    border-radius: 30% ;
+    border-bottom-right-radius: 0;
+    padding: 20px;
 }
