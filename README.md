@@ -66,3 +66,5 @@ A aplicação do Chat em Tempo Real estará disponível em seu navegador, atrav�
 >Nodemon: Ferramenta que monitora alterações no código e reinicia automaticamente o servidor.
 Cors: Middleware utilizado para permitir requisições entre diferentes domínios (Cross-Origin Resource Sharing).
 Essas tecnologias foram escolhidas para proporcionar uma experiência de chat em tempo real eficiente, moderna e interativa, tanto para o desenvolvedor quanto para o usuário final.
+>
+![Screenshot_1](https://github.com/iroDevs/ChatSocket/assets/83830330/b9090342-2f18-4b82-98a0-71c27221dfa3)
