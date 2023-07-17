@@ -19,7 +19,7 @@ exports.connection = (io) => {
             console.log(`socket ${socket.id} disconnected`);
         })
 
-        socket.on("set_userName", (value) => {
+        socket.on("set_username", (value) => {
             
             socket.data.username = value
             console.log("usuario setado", value);

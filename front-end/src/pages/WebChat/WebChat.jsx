@@ -32,19 +32,19 @@ const WebChat = () => {
             <div className="chat">
                 <ul>
                     {messageList.map((message,index)=>{
-                        const { authorId } = message
+                        const { authorId, author } = message
+                        console.log(message);
                          if (authorId == userId ) {
                                 return (
-                                    <li key={index} className='myMessage'><span>{username}</span>{message.text}</li>
+                                    <li key={index} className='myMessage'><span>{username}:</span>{message.text}</li>
                                 )
                          }else {
                             return (
-                                <li key={index} className='sendMessage'><span>{message.author}</span>{message.text}</li>
+                                <li key={index} className='sendMessage'><span>:{author}</span>{message.text}</li>
                             )
                          }
                     })}
-                    <li className='myMessage'><span>{username}:</span>Opa como vai mano</li>
-                    <li className='sendMessage'><span>:{'CatMatador'}</span> Tudo Bom </li>
+
                 </ul>    
             </div>  
             <Form>
