@@ -9,7 +9,10 @@ function connectedIO(){
     socket.on("connection", ()=> {
     console.log("conectado ao IO");
     })
+
+    return socket;
 }
+
 
 export default {
     connectedIO

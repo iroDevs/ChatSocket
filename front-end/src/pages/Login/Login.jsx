@@ -1,19 +1,40 @@
 import './style.css';
-import { useContext ,useState, useEffect} from 'react';
+import { useContext ,useState, useEffect, useRef} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import UserContext from '../../context/UserContext';
 import { useNavigate } from "react-router-dom";
-import socketUtils from '../../socket/socketUtils';
+import {io} from 'socket.io-client'
+
+
 
 const Login = () => {
+    const socket = useRef();
     const [user , setUser ] = useState("UserName")
-    const { setUsername } = useContext(UserContext)
+    const { setUsername, setUserId, setSocket } = useContext(UserContext)
     const navigate = useNavigate();
 
-    useEffect(()=> {
-        socketUtils.connectedIO();
-    },[])
+    useEffect(() => {
+        console.log('fazendo conexao');
+          socket.current = io("ws://localhost:3333");
+          socket.current.on("connection", () => {
+            console.log("connected to server");
+          });
+
+          setSocket(socket.current)
+    
+      }, []);
+
+      useEffect(() => {
+        socket.current.on("sendId", (value) => {
+            setUserId(value.id);
+        })
+    
+        return () => socket.current.off("sendId")
+        
+      }, [socket]);
+
+    
 
     function handleChange({target: {value}}){
         setUser(value)
@@ -21,6 +42,8 @@ const Login = () => {
     } 
 
     function handleClick(){
+        socket.current.emit("set_username", user)
+
         return navigate("/chat");
     }
     return (
