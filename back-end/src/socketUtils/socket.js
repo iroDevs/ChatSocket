@@ -2,7 +2,7 @@ const socketIO = require("socket.io")
 
 exports.sio = ( server ) => {
     return socketIO(server, {
-        transports: ["polling"],
+        transports: ["websocket"],
         cors: {
             origin: "*",
           }
@@ -25,18 +25,30 @@ exports.connection = (io) => {
             console.log("usuario setado", value);
         })
 
-        socket.on("teste", (info)=> {
-            console.log("evento ativado",info);
+        socket.on("joinSpecialRoom", ()=> {
+            if (socket.data.username === "urso") {
+                socket.join("specialRoom");
+            }
+        })
+
+        socket.on("joinDefaultRoom", ()=> {
+            socket.join("defaultRoom");
         })
 
         socket.on('message', text => {
-
-            console.log("message RECEBIDA", text);
-            io.emit('receive_message', {
-                text,
-                authorId: socket.id,
-                author: socket.data.username
-            })
+            if(socket.data.username === "urso"){
+                io.to("specialRoom").emit('receive_message', {
+                    text,
+                    authorId: socket.id,
+                    author: socket.data.username
+                })
+            }else {
+                io.to("defaultRoom").emit('receive_message', {
+                    text,
+                    authorId: socket.id,
+                    author: socket.data.username
+                })
+            }
         })
     })
 }

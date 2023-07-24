@@ -16,8 +16,12 @@ const WebChat = () => {
     useEffect(()=> {
         if (!socket) {
             navigate("/")
+        } if ( username === "urso"){
+            socket.emit("joinSpecialRoom")
+        }else {
+            socket.emit("joinDefaultRoom")
         }
-    },[])
+    },[socket,username,navigate])
 
     useEffect(()=> {
         socket.on('receive_message', data => {

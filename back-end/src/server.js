@@ -1,18 +1,29 @@
-const http = require('http');
 const cors = require('cors');
-
-const express = require('express');
-const app = express();
 const socketUtils = require('./socketUtils/socket')
+const express = require('express');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
 
-const server = http.createServer(app)
-const io = socketUtils.sio(server);
-socketUtils.connection(io);
+const app = express();
+const server = createServer(app);
+const io = new Server(server,{
+    cors: {
+        origin:'*',
+        methods: ['GET','POST']
+    }
+})
+
+socketUtils.connection(io)
+
+const port = 3333;
 
 app.use(cors());
 
-const port = 3333
 
 server.listen(port, ()=> {
-    console.log("running on port " + port);
+    console.log("server listening on port ",port);
+})
+
+app.get('/', ( req, res)=> {
+    res.send("<h1>ola mundo</h1>");
 })
